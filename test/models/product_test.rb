@@ -26,15 +26,14 @@ class ProductTest < ActiveSupport::TestCase
       
     product.price = 0
     assert product.invalid?
-    assert_equal ["must be greater than or equal to 0.01"],
-      product.errors[:price]
+    assert_equal ["must be greater than or equal to 0.01"], product.errors[:price]
       
     product.price = 1
     assert product.valid?
   end
   
   def new_product(image_url)
-    Product.new(title: "My book",
+    Product.new(title: "My book is coll",
                 description: "aaaaaaaa",
                 price: 1,
                 image_url: image_url)
@@ -61,6 +60,15 @@ class ProductTest < ActiveSupport::TestCase
     
     assert product.invalid?
     assert_equal [I18n.translate('errors.messages.taken')], product.errors[:title]
+  end
+  
+  test 'title should have 10 signs' do
+    product = Product.new(title: "My book",
+                          description: "aaaa",
+                          price: 1,
+                          image_url: "fred.gif")
+    assert product.invalid?
+    assert_equal ["10 charakter minimum"], product.errors[:title]
   end
   
 end
