@@ -7,4 +7,8 @@ class Product < ApplicationRecord
         message: 'must be a URL for GIF, JPG or PNG image.'
     }
     validates :title, length: {minimum: 10, too_short: "10 charakter minimum"}
+    
+    def self.latest
+        order.(:updated_at).last
+    end
 end
