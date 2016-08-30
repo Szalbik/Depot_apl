@@ -21,12 +21,12 @@ class ProductTest < ActiveSupport::TestCase
                           image_url: "zzz.jpg")
     product.price = -1
     assert product.invalid?
-    assert_equal ["must be greater than or equal to 0.01"], 
+    assert_equal [I18n.translate("errors.messages.greater_equal_0_01")], 
       product.errors[:price]
       
     product.price = 0
     assert product.invalid?
-    assert_equal ["must be greater than or equal to 0.01"], product.errors[:price]
+    assert_equal [I18n.translate("errors.messages.greater_equal_0_01")], product.errors[:price]
       
     product.price = 1
     assert product.valid?
@@ -53,10 +53,8 @@ class ProductTest < ActiveSupport::TestCase
   end
   
   test 'products is not valid without unique title' do 
-    product = Product.new(title: products(:ruby).title,
-                          description: "aaaaaaa",
-                          price: 1,
-                          image_url: "fred.gif")
+    #puts(products(:ruby).inspect)
+    product = Product.new(products(:ruby).attributes)
     
     assert product.invalid?
     assert_equal [I18n.translate('errors.messages.taken')], product.errors[:title]
@@ -68,7 +66,7 @@ class ProductTest < ActiveSupport::TestCase
                           price: 1,
                           image_url: "fred.gif")
     assert product.invalid?
-    assert_equal ["10 charakter minimum"], product.errors[:title]
+    assert_equal [I18n.translate('errors.messages.min_ten_chars')], product.errors[:title]
   end
   
 end
