@@ -2,6 +2,13 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-App.productsChannel = 
-  App.cable.subscriptions.create { channel : "ProductsChannel" },
-    received: (data) -> $(".store #main").html(data.html)
+App.products = App.cable.subscriptions.create "ProductsChannel",
+  connected: ->
+    # Called when subscription is ready for use on the server
+    
+  disconnected: ->
+    # Called when the subscription has been terminated by the server
+    
+  received: (data) ->
+    $(".store #main").html(data.html)
+    

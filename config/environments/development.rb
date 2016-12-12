@@ -52,6 +52,6 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   
-  # Allow access to channels by multiple machine
+  # Allow access to channels by dev env only
   config.action_cable.disable_request_forgery_protection = true
 end
