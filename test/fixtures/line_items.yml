@@ -3,10 +3,12 @@
 one:
   product: two
   cart: one
+  price: 9.99
 
 two:
   product: two
   cart: two
+  price: 9.99
 
 three:
   product: ruby
